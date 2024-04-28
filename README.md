@@ -24,7 +24,7 @@ CoreDataManager.shared?.createEntity(entityType: User.self) { user in
 ```
 Это создаст нового пользователя с именем Alice и возрастом 30 лет.
 
-# Получение сущностей
+### Получение сущностей
 Для получения сущностей по определенным критериям используйте метод fetchEntities:
 ```swift
 if let users = CoreDataManager.shared?.fetchEntities(entityType: User.self, predicate: NSPredicate(format: "age > %@", "25")) {
