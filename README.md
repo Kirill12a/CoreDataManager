@@ -14,7 +14,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 ```
 ## Основные методы и их использование
 
-# Создание сущностей
+### Создание сущностей
 Для создания новой сущности используйте метод createEntity. Этот метод принимает тип сущности и блок конфигурации:
 ```swift
 CoreDataManager.shared?.createEntity(entityType: User.self) { user in
@@ -35,7 +35,7 @@ if let users = CoreDataManager.shared?.fetchEntities(entityType: User.self, pred
 ```
 Это вернет и распечатает всех пользователей старше 25 лет.
 
-# Обновление сущностей
+### Обновление сущностей
 Чтобы обновить сущности, используйте updateEntities:
 ```swift
 CoreDataManager.shared?.updateEntities(entityType: User.self, predicate: NSPredicate(format: "name == %@", "Alice")) { user in
@@ -45,7 +45,7 @@ CoreDataManager.shared?.updateEntities(entityType: User.self, predicate: NSPredi
 Это обновит возраст пользователя Alice до 35 лет.
 
 
-# Удаление сущностей
+### Удаление сущностей
 Для удаления сущностей используйте метод deleteEntities:
 ```swift
 CoreDataManager.shared?.deleteEntities(entityType: User.self, predicate: NSPredicate(format: "age < %@", "18"))
