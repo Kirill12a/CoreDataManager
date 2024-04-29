@@ -84,5 +84,18 @@ public final class CoreDataManager {
         saveContext()
         print("🗑 Deleted \(entities.count) \(String(describing: entityType)) entities.")
     }
+
+    // Удаление всех значений в сущности
+    public func deleteAllEntities<T: NSManagedObject>(entityType: T.Type) {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: String(describing: entityType))
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do {
+            try context.execute(batchDeleteRequest)
+            saveContext()
+            print("🗑 Deleted all objects of type \(entityType).")
+        } catch {
+            print("Error deleting objects: \(error)")
+        }
+    }
 }
 
