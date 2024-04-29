@@ -21,7 +21,8 @@ public final class CoreDataManager {
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-            print("📡 Database URL: \(storeDescription.url?.absoluteString ?? "N/A")")
+            self.debugPrint("📡 Database URL: \(storeDescription.url?.absoluteString ?? "N/A")")
+//            print("📡 Database URL: \(storeDescription.url?.absoluteString ?? "N/A")")
         }
     }
 
@@ -35,7 +36,6 @@ public final class CoreDataManager {
             do {
                 try context.save()
                 debugPrint("💾 Context saved successfully.")
-//                print("💾 Context saved successfully.")
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -52,7 +52,8 @@ public final class CoreDataManager {
         let entity = T(entity: entityDescription, insertInto: context)
         configure(entity)
         saveContext()
-        print("🆕 Created new \(entityName).")
+        debugPrint("🆕 Created new \(entityName).")
+//        print("🆕 Created new \(entityName).")
     }
 
     // Получение сущностей по условию
@@ -63,7 +64,8 @@ public final class CoreDataManager {
 
         do {
             let results = try context.fetch(fetchRequest)
-            print("🔍 Found \(results.count) \(entityName)(s) matching predicate.")
+            debugPrint("🔍 Found \(results.count) \(entityName)(s) matching predicate.")
+//            print("🔍 Found \(results.count) \(entityName)(s) matching predicate.")
             return results
         } catch {
             fatalError("Failed to fetch entities: \(error)")
@@ -75,7 +77,8 @@ public final class CoreDataManager {
         let entities = fetchEntities(entityType: entityType, predicate: predicate)
         entities.forEach(configure)
         saveContext()
-        print("🔄 Updated \(entities.count) \(String(describing: entityType)) entities.")
+        debugPrint("🔄 Updated \(entities.count) \(String(describing: entityType)) entities.")
+//        print("🔄 Updated \(entities.count) \(String(describing: entityType)) entities.")
     }
 
     // Удаление сущностей по условию
@@ -83,7 +86,8 @@ public final class CoreDataManager {
         let entities = fetchEntities(entityType: entityType, predicate: predicate)
         entities.forEach(context.delete)
         saveContext()
-        print("🗑 Deleted \(entities.count) \(String(describing: entityType)) entities.")
+        debugPrint("🗑 Deleted \(entities.count) \(String(describing: entityType)) entities.")
+//        print("🗑 Deleted \(entities.count) \(String(describing: entityType)) entities.")
     }
 
     // Удаление всех значений в сущности
@@ -93,7 +97,8 @@ public final class CoreDataManager {
         do {
             try context.execute(batchDeleteRequest)
             saveContext()
-            print("🗑 Deleted all objects of type \(entityType).")
+            debugPrint("🗑 Deleted all objects of type \(entityType).")
+//            print("🗑 Deleted all objects of type \(entityType).")
         } catch {
             print("Error deleting objects: \(error)")
         }
