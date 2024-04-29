@@ -82,6 +82,7 @@ CoreDataManager.shared?.deleteEntities(entityType: User.self, predicate: NSPredi
 ```swift
 CoreDataManager.shared?.deleteAllEntities(entityType: User.self)
 ```
+Это удалит всех пользователей.
 
 ## Сохранение изменений
 Чтобы сохранить изменения, сделанные в контексте, не забудьте вызвать saveContext, особенно при переходе приложения в фоновый режим:
