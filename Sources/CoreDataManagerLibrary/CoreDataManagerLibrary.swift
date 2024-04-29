@@ -34,7 +34,8 @@ public final class CoreDataManager {
         if context.hasChanges {
             do {
                 try context.save()
-                print("💾 Context saved successfully.")
+                debugPrint("💾 Context saved successfully.")
+//                print("💾 Context saved successfully.")
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -96,6 +97,17 @@ public final class CoreDataManager {
         } catch {
             print("Error deleting objects: \(error)")
         }
+    }
+
+
+    private func debugPrint(_ message: String) {
+        if isDiffModeEnabled() {
+            print(message)
+        }
+    }
+
+   private func isDiffModeEnabled() -> Bool {
+        return ProcessInfo.processInfo.arguments.contains("CoreDataDebugMode")
     }
 }
 
