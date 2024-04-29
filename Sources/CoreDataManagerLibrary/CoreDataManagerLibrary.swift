@@ -22,7 +22,6 @@ public final class CoreDataManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
             self.debugPrint("📡 Database URL: \(storeDescription.url?.absoluteString ?? "N/A")")
-//            print("📡 Database URL: \(storeDescription.url?.absoluteString ?? "N/A")")
         }
     }
 
@@ -53,7 +52,6 @@ public final class CoreDataManager {
         configure(entity)
         saveContext()
         debugPrint("🆕 Created new \(entityName).")
-//        print("🆕 Created new \(entityName).")
     }
 
     // Получение сущностей по условию
@@ -65,7 +63,6 @@ public final class CoreDataManager {
         do {
             let results = try context.fetch(fetchRequest)
             debugPrint("🔍 Found \(results.count) \(entityName)(s) matching predicate.")
-//            print("🔍 Found \(results.count) \(entityName)(s) matching predicate.")
             return results
         } catch {
             fatalError("Failed to fetch entities: \(error)")
@@ -78,7 +75,6 @@ public final class CoreDataManager {
         entities.forEach(configure)
         saveContext()
         debugPrint("🔄 Updated \(entities.count) \(String(describing: entityType)) entities.")
-//        print("🔄 Updated \(entities.count) \(String(describing: entityType)) entities.")
     }
 
     // Удаление сущностей по условию
@@ -87,7 +83,6 @@ public final class CoreDataManager {
         entities.forEach(context.delete)
         saveContext()
         debugPrint("🗑 Deleted \(entities.count) \(String(describing: entityType)) entities.")
-//        print("🗑 Deleted \(entities.count) \(String(describing: entityType)) entities.")
     }
 
     // Удаление всех значений в сущности
@@ -98,20 +93,23 @@ public final class CoreDataManager {
             try context.execute(batchDeleteRequest)
             saveContext()
             debugPrint("🗑 Deleted all objects of type \(entityType).")
-//            print("🗑 Deleted all objects of type \(entityType).")
         } catch {
             print("Error deleting objects: \(error)")
         }
     }
 
 
+}
+
+/// Logs print
+extension CoreDataManager {
     private func debugPrint(_ message: String) {
         if isDiffModeEnabled() {
             print(message)
         }
     }
 
-   private func isDiffModeEnabled() -> Bool {
+    private func isDiffModeEnabled() -> Bool {
         return ProcessInfo.processInfo.arguments.contains("CoreDataDebugMode")
     }
 }
